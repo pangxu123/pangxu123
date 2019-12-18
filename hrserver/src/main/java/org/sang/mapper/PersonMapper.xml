@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.sang.mapper.PersonMapper" >
+    <insert id="addPerson" parameterType="org.sang.bean.PerEc">
+            insert into perec (name, workid, ecproject,
+      ecdata, ecattribute,
+      ecmoney, ecadmin, ecmarks)
+    values (#{perec.name,jdbcType=VARCHAR}, #{perec.workid,jdbcType=VARCHAR}, #{perec.ecproject,jdbcType=VARCHAR},
+      #{perec.ecdata,jdbcType=VARCHAR}, #{perec.ecattribute,jdbcType=VARCHAR},
+      #{perec.ecmoney,jdbcType=VARCHAR}, #{perec.ecadmin,jdbcType=VARCHAR}, #{perec.ecmarks,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="getAllPersons" resultType="org.sang.bean.PerEc">
+        SELECT * FROM perec;
+    </select>
+
+    <update id="updatePerson" parameterType="org.sang.bean.PerEc">
+        update perec
+        <set>
+
+            <if test="perEc.name != null">
+                name = #{perEc.name,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.workid != null">
+                workid = #{perEc.workid,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.ecproject != null">
+                ecproject = #{perEc.ecproject,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.ecdata != null">
+                ecdata = #{perEc.ecdata,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.ecattribute != null">
+                ecattribute = #{perEc.ecattribute,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.ecmoney != null">
+                ecmoney = #{perEc.ecmoney,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.ecadmin != null">
+                ecadmin = #{perEc.ecadmin,jdbcType=VARCHAR},
+            </if>
+            <if test="perEc.ecmarks != null">
+                ecmarks = #{perEc.ecmarks,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{perEc.id,jdbcType=INTEGER}
+    </update>
+    <delete id="deletePerson">
+        DELETE FROM perec WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+
+</mapper>

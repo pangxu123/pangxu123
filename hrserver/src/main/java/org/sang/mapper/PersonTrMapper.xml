@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.sang.mapper.PersonTrMapper" >
+    <insert id="addPersonTr" parameterType="org.sang.bean.PerTr">
+            insert into pertr (tr_contents, tr_category, tr_lead_department,
+      tr_assistance_department, tr_object,
+      tr_form, tr_lecturer, tr_material,
+      tr_place, tr_duration, tr_method,
+      tr_remarks, tr_budget_mode)
+    values (#{pertr.tr_contents,jdbcType=VARCHAR}, #{pertr.tr_category,jdbcType=VARCHAR}, #{pertr.tr_lead_department,jdbcType=VARCHAR},
+      #{pertr.tr_assistance_department,jdbcType=VARCHAR}, #{pertr.tr_object,jdbcType=VARCHAR},
+      #{pertr.tr_form,jdbcType=VARCHAR}, #{pertr.tr_lecturer,jdbcType=VARCHAR}, #{pertr.tr_material,jdbcType=VARCHAR},
+      #{pertr.tr_place,jdbcType=VARCHAR}, #{pertr.tr_duration,jdbcType=VARCHAR}, #{pertr.tr_method,jdbcType=VARCHAR},
+      #{pertr.tr_remarks,jdbcType=VARCHAR}, #{pertr.tr_budget_mode,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="getAllPersonsTr" resultType="org.sang.bean.PerTr">
+        SELECT * FROM pertr;
+    </select>
+
+    <update id="updatePersonTr" parameterType="org.sang.bean.PerTr">
+        update pertr
+        <set>
+            <if test="perTr.tr_contents != null">
+                tr_contents = #{perTr.tr_contents,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_category != null">
+                tr_category = #{perTr.tr_category,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_lead_department != null">
+                tr_lead_department = #{perTr.tr_lead_department,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_assistance_department != null">
+                tr_assistance_department = #{perTr.tr_assistance_department,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_object != null">
+                tr_object = #{perTr.tr_object,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_form != null">
+                tr_form = #{perTr.tr_form,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_lecturer != null">
+                tr_lecturer = #{perTr.tr_lecturer,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_material != null">
+                tr_material = #{perTr.tr_material,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_place != null">
+                tr_place = #{perTr.tr_place,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_duration != null">
+                tr_duration = #{perTr.tr_duration,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_method != null">
+                tr_method = #{perTr.tr_method,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_remarks != null">
+                tr_remarks = #{perTr.tr_remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="perTr.tr_budget_mode != null">
+                tr_budget_mode = #{perTr.tr_budget_mode,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{perTr.id,jdbcType=INTEGER}
+    </update>
+    <delete id="deletePersonTr">
+        DELETE FROM pertr WHERE id IN
+        <foreach collection="ids" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+
+</mapper>
